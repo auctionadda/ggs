@@ -39,6 +39,18 @@
         <option value="track pad">Track Pad</option>
         <option value="system button">System Button</option>
     </select>
+	
+	<script>
+        const ws = new WebSocket('ws://localhost:8080')
+        ws.onopen = () => {
+            ws.send('hello world')
+        }
+        document.getElementById('dropdown').onchange = onDropdownChanged
+        function onDropdownChanged(e) {
+            console.log(e.target.value)
+            ws.send(e.target.value)
+        }
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
