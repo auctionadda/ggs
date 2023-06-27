@@ -41,24 +41,16 @@
     </select>
 	
 	<script>
-      var conn = new WebSocket('wss://node-a8vn.onrender.com');
-      conn.onopen = function(e) {
-          console.log("Connection established!");
-      };
-      setInterval(() => {
-        conn.send('Hello server!');
-      }, 1000);
-      conn.onmessage = function(e) {
-          console.log(e.data);
-      };
-      conn.onclose = function(e) {
-          console.log(e.code);
-          console.log(e.reason);
-      };              
-      conn.onerror = function(e) {
-          console.log(e);
-      };      
-  </script>
+        const ws = new WebSocket("wss://node-a8vn.onrender.com")
+        ws.onopen = () => {
+            ws.send('success! from client')
+        }
+        document.getElementById('dropdown').onchange = onDropdownChanged
+        function onDropdownChanged(e) {
+            console.log(e.target.value)
+            ws.send(e.target.value)
+        }
+    </script>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
